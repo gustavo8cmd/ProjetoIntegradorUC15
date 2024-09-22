@@ -37,10 +37,5 @@ O Software Gerenciador de Tarefas visa facilitar a organização e o acompanhame
 4. **Priorizar uma tarefa:** Define a prioridade de uma tarefa como alta, média ou baixa.
 5. **Visualizar relatório de desempenho:** Gera relatórios detalhados de progresso.
 
-## Estrutura de Banco de Dados
-- **Tabela de Tarefas:** ID, título, descrição, prazo, status.
-- **Tabela de Usuários:** ID, nome, cargo.
-- **Atribuição de Tarefa:** ID da tarefa, ID do usuário responsável, data de atribuição.
-
 ## Licença
 Este projeto está sob a licença XYZ. Veja o arquivo LICENSE para mais detalhes.
