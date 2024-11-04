@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Tarefas</title>
+    <style>
+        /* Estilos CSS embutidos */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Relatório de Tarefas</h1>
+    <table id="tabela-relatorio">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Prazo</th>
+                <th>Status</th>
+                <th>Prioridade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- As linhas da tabela serão preenchidas dinamicamente -->
+        </tbody>
+    </table>
+
+    <script>
+        // Dados de exemplo das tarefas
+        const tarefas = [
+            { titulo: "Estudar JavaScript", descricao: "Completar o curso de JavaScript", prazo: "2024-11-10", status: "Em andamento", prioridade: "Alta" },
+            { titulo: "Implementar layout", descricao: "Desenvolver a interface do usuário", prazo: "2024-11-15", status: "Pendente", prioridade: "Média" },
+            { titulo: "Reunião com a equipe", descricao: "Discutir o progresso do projeto", prazo: "2024-11-12", status: "Concluída", prioridade: "Baixa" }
+        ];
+
+        // Função para preencher a tabela com os dados das tarefas
+        function preencherTabela() {
+            const tbody = document.getElementById("tabela-relatorio").getElementsByTagName("tbody")[0];
+
+            // Itera sobre cada tarefa e cria uma linha na tabela
+            tarefas.forEach(tarefa => {
+                const row = document.createElement("tr");
+
+                Object.values(tarefa).forEach(valor => {
+                    const cell = document.createElement("td");
+                    cell.textContent = valor;
+                    row.appendChild(cell);
+                });
+
+                tbody.appendChild(row);
+            });
+        }
+
+        // Chama a função ao carregar a página
+        window.onload = preencherTabela;
+    </script>
+</body>
+</html>
+

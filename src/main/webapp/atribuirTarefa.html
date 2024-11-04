@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atribuir Tarefa</title>
+    <style>
+        /* Estilos CSS embutidos */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Atribuir Tarefa</h1>
+    <form id="form-atribuir-tarefa" onsubmit="return validarFormulario()">
+        <label for="tarefa">Tarefa:</label>
+        <input type="text" id="tarefa" name="tarefa" required>
+
+        <label for="membro">Atribuir a:</label>
+        <select id="membro" name="membro" required>
+            <option value="">Selecione um membro</option>
+            <option value="membro1">Membro 1</option>
+            <option value="membro2">Membro 2</option>
+            <option value="membro3">Membro 3</option>
+        </select>
+
+        <button type="submit">Atribuir Tarefa</button>
+    </form>
+
+    <script>
+        // Validação em JavaScript embutido
+        function validarFormulario() {
+            const tarefa = document.getElementById('tarefa').value;
+            const membro = document.getElementById('membro').value;
+
+            if (tarefa === "" || membro === "") {
+                alert("Todos os campos são obrigatórios!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
