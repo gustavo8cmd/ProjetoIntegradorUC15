@@ -61,9 +61,12 @@
 </head>
 <body>
     <h1>Atribuir Tarefa</h1>
-    <form id="form-atribuir-tarefa" onsubmit="return validarFormulario()">
+    <form id="form-atribuir-tarefa" onsubmit="return atribuirTarefa()">
         <label for="tarefa">Tarefa:</label>
-        <input type="text" id="tarefa" name="tarefa" required>
+        <select id="tarefa" name="tarefa" required>
+            <option value="">Selecione uma tarefa</option>
+            <!-- As opções de tarefa serão preenchidas via JavaScript -->
+        </select>
 
         <label for="membro">Atribuir a:</label>
         <select id="membro" name="membro" required>
@@ -77,17 +80,41 @@
     </form>
 
     <script>
-        // Validação em JavaScript embutido
-        function validarFormulario() {
-            const tarefa = document.getElementById('tarefa').value;
+        // Preencher o combobox com tarefas do localStorage
+        function carregarTarefas() {
+            const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+            const tarefaSelect = document.getElementById('tarefa');
+
+            tarefas.forEach((tarefa, index) => {
+                const option = document.createElement('option');
+                option.value = index; // Usar o índice da tarefa como valor
+                option.textContent = tarefa.titulo; // Exibir o título da tarefa
+                tarefaSelect.appendChild(option);
+            });
+        }
+
+        // Atribuir tarefa e redirecionar para o relatório
+        function atribuirTarefa() {
+            const tarefaIndex = document.getElementById('tarefa').value;
             const membro = document.getElementById('membro').value;
 
-            if (tarefa === "" || membro === "") {
+            if (tarefaIndex === "" || membro === "") {
                 alert("Todos os campos são obrigatórios!");
                 return false;
             }
-            return true;
+
+            // Adiciona a atribuição ao localStorage
+            const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+            tarefas[tarefaIndex].responsavel = membro; // Define o responsável na tarefa
+            localStorage.setItem('tarefas', JSON.stringify(tarefas));
+
+            // Redirecionar para o relatório
+            window.location.href = 'relatorio.html';
+            return false; // Evitar que o formulário seja enviado
         }
+
+        // Chama a função ao carregar a página
+        window.onload = carregarTarefas;
     </script>
 </body>
 </html>

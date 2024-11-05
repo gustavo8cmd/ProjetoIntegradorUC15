@@ -64,7 +64,9 @@
     <h1>Definir Prioridade da Tarefa</h1>
     <form id="form-priorizar-tarefa" onsubmit="return validarFormulario()">
         <label for="tarefa">Tarefa:</label>
-        <input type="text" id="tarefa" name="tarefa" placeholder="Nome da tarefa" required>
+        <select id="tarefa" name="tarefa" required>
+            <option value="">Selecione uma tarefa</option>
+        </select>
 
         <label for="prioridade">Prioridade:</label>
         <select id="prioridade" name="prioridade" required>
@@ -78,18 +80,40 @@
     </form>
 
     <script>
+         // Função para preencher o combo box com as tarefas do local storage
+        function preencherComboBoxTarefas() {
+            const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+            const selectTarefa = document.getElementById('tarefa');
+
+            tarefas.forEach((tarefa, index) => {
+                const option = document.createElement('option');
+                option.value = index; // Armazenar o índice para facilitar a atualização
+                option.textContent = tarefa.titulo; // Supondo que cada tarefa tenha um campo 'titulo'
+                selectTarefa.appendChild(option);
+            });
+        }
+
         // Validação do formulário
         function validarFormulario() {
-            const tarefa = document.getElementById('tarefa').value;
+            const tarefaIndex = document.getElementById('tarefa').value; // Obter índice da tarefa selecionada
             const prioridade = document.getElementById('prioridade').value;
 
-            if (tarefa === "" || prioridade === "") {
+            if (tarefaIndex === "" || prioridade === "") {
                 alert("Por favor, preencha todos os campos.");
                 return false;
             }
+
+            // Atualiza a prioridade da tarefa no local storage
+            const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+            tarefas[tarefaIndex].prioridade = prioridade; // Atualiza a prioridade
+            localStorage.setItem('tarefas', JSON.stringify(tarefas)); // Salva novamente no local storage
+
             alert("Prioridade definida com sucesso!");
-            return true;
-        }
+            window.location.href = "relatorio.html";
+            return false; // Impede o envio do formulário
+        }   
+        // Chama a função ao carregar a página
+        window.onload = preencherComboBoxTarefas;
     </script>
 </body>
 </html>

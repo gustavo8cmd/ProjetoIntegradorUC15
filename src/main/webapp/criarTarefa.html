@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Tarefa</title>
@@ -61,7 +62,7 @@
 </head>
 <body>
     <h1>Criar Nova Tarefa</h1>
-    <form id="form-criar-tarefa" onsubmit="return validarFormulario()">
+    <form id="form-criar-tarefa" onsubmit="return criarTarefa()">
         <label for="titulo">Título da Tarefa:</label>
         <input type="text" id="titulo" name="titulo" required>
 
@@ -74,19 +75,40 @@
         <button type="submit">Criar Tarefa</button>
     </form>
 
+    <div class="success-message" id="success-message" style="display: none;">Tarefa criada com sucesso!</div> <!-- Mensagem de sucesso -->
+   
     <script>
-        // Validação em JavaScript embutido
-        function validarFormulario() {
+        // Array para armazenar as tarefas
+        let tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+
+        function criarTarefa() {
             const titulo = document.getElementById('titulo').value;
             const descricao = document.getElementById('descricao').value;
             const prazo = document.getElementById('prazo').value;
 
-            if (titulo === "" || descricao === "" || prazo === "") {
-                alert("Todos os campos são obrigatórios!");
-                return false;
-            }
-            return true;
+            // Criação da nova tarefa
+            const novaTarefa = {
+                titulo,
+                descricao,
+                prazo,
+                status: "Pendente", // Definindo um status padrão
+                prioridade: "Média" // Definindo uma prioridade padrão
+            };
+
+            // Armazenando a tarefa no array
+            tarefas.push(novaTarefa);
+            localStorage.setItem('tarefas', JSON.stringify(tarefas));
+
+            // Exibir mensagem de sucesso
+            document.getElementById('success-message').style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = 'relatorio.html';
+            }, 1000); // Redireciona após 1 segundo
+
+            return false; // Evitar que o formulário seja enviado
         }
+        
     </script>
 </body>
 </html>

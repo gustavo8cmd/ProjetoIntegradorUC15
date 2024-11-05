@@ -61,6 +61,7 @@
                 <th>Prazo</th>
                 <th>Status</th>
                 <th>Prioridade</th>
+                <th>Responsável</th>
             </tr>
         </thead>
         <tbody>
@@ -69,17 +70,24 @@
     </table>
 
     <script>
-        // Dados de exemplo das tarefas
-        const tarefas = [
-            { titulo: "Estudar JavaScript", descricao: "Completar o curso de JavaScript", prazo: "2024-11-10", status: "Em andamento", prioridade: "Alta" },
-            { titulo: "Implementar layout", descricao: "Desenvolver a interface do usuário", prazo: "2024-11-15", status: "Pendente", prioridade: "Média" },
-            { titulo: "Reunião com a equipe", descricao: "Discutir o progresso do projeto", prazo: "2024-11-12", status: "Concluída", prioridade: "Baixa" }
-        ];
+        // Recupera as tarefas do armazenamento local
+        const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
 
         // Função para preencher a tabela com os dados das tarefas
         function preencherTabela() {
             const tbody = document.getElementById("tabela-relatorio").getElementsByTagName("tbody")[0];
 
+            // Verifica se há tarefas para mostrar
+            if (tarefas.length === 0) {
+                const row = document.createElement("tr");
+                const cell = document.createElement("td");
+                cell.colSpan = 5; // Mescla as colunas
+                cell.textContent = "Nenhuma tarefa cadastrada.";
+                row.appendChild(cell);
+                tbody.appendChild(row);
+                return;
+            }
+            
             // Itera sobre cada tarefa e cria uma linha na tabela
             tarefas.forEach(tarefa => {
                 const row = document.createElement("tr");
