@@ -2,14 +2,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gerenciador</groupId>
-    <artifactId>mavenproject1</artifactId>
+    <artifactId>gerenciador-tarefas</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>mavenproject1-1.0-SNAPSHOT</name>
+    <name>GerenciadorTarefas-1.0-SNAPSHOT</name>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jakartaee>11.0.0-M1</jakartaee>
+        <jakartaee>11.0.0-M4</jakartaee>
+        <maven.compiler.release>17</maven.compiler.release>
     </properties>
     
     <dependencies>
@@ -19,7 +20,15 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.49</version> <!-- Atualize para a versão desejada -->
+        </dependency>
+ 
     </dependencies>
+    
     
     <build>
         <plugins>
